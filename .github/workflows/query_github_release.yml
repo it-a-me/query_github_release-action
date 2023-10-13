@@ -18,4 +18,5 @@ jobs:
       - name: Get Release Json
         run: curl "https://github.com/playit-cloud/playit-agent" > api.json
       - name: Parse Release Json
-        run: 'cat api.json | jq ".name" 1>&2'
+        run: |
+          perl -MJSON::PP -nge 'my $json = decode_json $_;  open ( my $fh, ">>", "./api.json" ); printf $fh "RELEASE_VERSION=%s\n", $json->{"name"};'
