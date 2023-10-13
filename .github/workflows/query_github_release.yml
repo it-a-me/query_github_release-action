@@ -15,7 +15,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          curl "https://github.com/playit-cloud/playit-agent" > api.json
-          cat api.json | jq '.name'
+      - name: Get Release Json
+        run: curl "https://github.com/playit-cloud/playit-agent" > api.json
+      - name: Parse Release Json
+        run: cat api.json | jq '.name'
